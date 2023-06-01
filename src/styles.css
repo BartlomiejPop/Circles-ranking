@@ -1,0 +1,309 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Bruno Ace SC', cursive, sans-serif;
+}
+
+body {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC');
+  animation: bg-scrolling 0.32s infinite linear;
+  margin-top: 13.5rem;
+  font: 400 16px/1.5 exo, ubuntu, 'segoe ui', helvetica, arial, sans-serif;
+  text-align: center;
+  overflow: hidden;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standardowy składnik */
+}
+
+.timer-bg {
+  display: none;
+  justify-content: space-between;
+  position: absolute;
+  background-attachment: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 300px;
+  color: rgb(154, 154, 154, 0.1);
+  outline: none;
+}
+
+@media (max-width: 1400px) {
+  .timer-bg {
+    font-size: 200px;
+  }
+}
+
+@media (max-width: 700px) {
+  .timer-bg {
+    font-size: 100px;
+  }
+}
+
+@media (max-width: 400px) {
+  .timer-bg {
+    font-size: 50px;
+  }
+}
+
+.circle {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  cursor: pointer;
+  border: 8px solid rgb(255, 255, 255);
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 9px 9px 44px 16px rgba(66, 68, 90, 1);
+  -moz-box-shadow: 9px 9px 44px 16px rgba(66, 68, 90, 1);
+  box-shadow: 9px 9px 44px 16px rgba(66, 68, 90, 1);
+  animation: puff-in-center 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+.circle-event {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  cursor: pointer;
+  border: 5px dashed rgb(255, 255, 255);
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 9px 9px 44px 16px rgb(209, 30, 215);
+  -moz-box-shadow: 9px 9px 44px 16px rgb(209, 30, 215);
+  box-shadow: 9px 9px 44px 16px rgb(209, 30, 215);
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 200% 200%;
+  animation: gradient 1.4s ease-in,
+    puff-in-center 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+@media (max-width: 1600px) {
+  .circle,
+  .circle-event {
+    border: 5px solid rgb(255, 255, 255);
+    width: 180px;
+    height: 180px;
+  }
+}
+@media (max-width: 1300px) {
+  .circle,
+  .circle-event {
+    border: 5px solid rgb(255, 255, 255);
+    width: 150px;
+    height: 150px;
+  }
+}
+@media (max-width: 1000px) {
+  .circle,
+  .circle-event {
+    border: 4px solid rgb(255, 255, 255);
+    width: 120px;
+    height: 120px;
+  }
+}
+@media (max-width: 700px) {
+  .circle,
+  .circle-event {
+    border: 4px solid rgb(255, 255, 255);
+    width: 100px;
+    height: 100px;
+  }
+}
+@media (max-width: 400px) {
+  .circle,
+  .circle-event {
+    border: 1px solid rgb(255, 255, 255);
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.score {
+  color: white;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .score {
+    font-size: 20px;
+  }
+}
+
+.game-over {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 30%;
+  width: 100%;
+  height: 300px;
+}
+
+.final-score {
+  color: rgb(154, 154, 154);
+  font-size: 70px;
+  font-weight: 400;
+  animation: puff-in-center 0.3s ease-in;
+}
+
+@media (max-width: 700px) {
+  .final-score {
+    font-size: 40px;
+  }
+}
+
+.record {
+  color: rgb(154, 154, 154);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.play-again {
+  padding: 20px;
+  width: 300px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 30px;
+  font-style: italic;
+  color: rgb(119, 119, 119);
+  background-color: rgb(119, 119, 119, 0.15);
+}
+
+audio {
+  display: none;
+}
+
+.audio-interface {
+  margin-top: 30px;
+  width: 300px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.pause-resume {
+  width: 40px;
+  padding: 5px;
+  scale: 1.5;
+  border: none;
+  border-radius: 6px;
+  color: rgb(119, 119, 119);
+  background-color: rgb(119, 119, 119, 0.15);
+  cursor: pointer;
+}
+
+.volume {
+  cursor: pointer;
+}
+
+.color-mode {
+  margin-top: 20px;
+  display: flex;
+  gap: 40px;
+}
+.lightmode {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border: 2px solid rgb(169, 169, 169);
+  background-color: white;
+  cursor: pointer;
+}
+
+.darkmode {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border: 2px solid rgb(169, 169, 169);
+  background-color: black;
+  cursor: pointer;
+}
+
+.login-input,
+.register-input {
+  margin: 15px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  color: rgb(119, 119, 119);
+  background-color: rgb(119, 119, 119, 0.15);
+  cursor: pointer;
+}
+
+.login-btn,
+.register-btn {
+  margin: 15px;
+  width: 100px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  color: rgb(119, 119, 119);
+  background-color: rgb(119, 119, 119, 0.15);
+  cursor: pointer;
+}
+
+.set-up-text {
+  margin-top: 50px;
+  color: rgb(154, 154, 154);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+@keyframes puff-in-center {
+  0% {
+    transform: scale(2);
+    filter: blur(4px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bg-scrolling {
+  100% {
+    background-position: 0px 50px;
+  }
+}
+
+@keyframes bg-scrolling-dark {
+  100% {
+    background-position: 0px 225px;
+  }
+}
+
+@keyframes vanish {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

@@ -1,14 +1,78 @@
 <!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page title</title>
-    <link rel="stylesheet" href="./sass/index.scss" />
-    <script type="module" src="./index.js"></script>
-  </head>
-  <body>
-    <!-- ❗️❗️❗️ Add partials like so for every page -->
-    <include src="./partials/example.html"></include>
-  </body>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="styles.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap"
+			rel="stylesheet" />
+		<title>Document</title>
+		<script
+			src="https://kit.fontawesome.com/8a4634c38a.js"
+			crossorigin="anonymous"
+			defer></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="figure"></div>
+			<div class="circle">
+				<span class="score">0</span>
+			</div>
+		</div>
+		<div class="timer-bg" aria-readonly="true">1s</div>
+		<div class="game-over">
+			<span class="final-score">CIRCLES</span>
+			<span class="record">click the circles! </span>
+			<span class="record">Timer in the background indicates time for clicking the next circle! </span>
+			<button class="play-again">Play</button>
+			<div class="audio-interface">
+				<button class="pause-resume"><i class="fa-solid fa-play"></i></i></button>
+				<input class="volume" type="range" min="0" max="100" />
+			</div>
+			<span class="set-up-text">Log In to climb in ranking!</span>
+			 <form class="login__form" id="register-div">	
+          <input
+            class="login-input"
+            type="email"
+            id="login-email"
+            name="login-email"
+            placeholder="E-mail"
+            autocomplete="off"
+            required
+          />
+          <input
+            class="register-input"
+            type="password"
+            id="login-password"
+            name="login-password"
+            placeholder="Password"
+            autocomplete="off"
+            required
+          />
+        </form>
+		<div class="log-panel">
+        <button class="login-btn" id="log-btn">log in</button>
+        <button class="register-btn" id="register-btn">register</button>
+		</div>
+        <p class="header__link logged"></p>
+        <button class="header__logout" style="visibility: hidden" id="logout-btn">LOG OUT</button>
+			<div class="color-mode">
+				<button class="lightmode"></button>
+				<button class="darkmode"></button>
+			</div>
+		</div>
+		<audio
+			id="audio"
+			src="audio/lost_my_name.mp3"
+			controls
+			loop
+			preload="auto"></audio>
+		<audio id="click" src="audio/click.mp3"></audio>
+		<audio id="bonus" src="audio/bonus.mp3"></audio>
+		<script src="index.js" type="module"></script>
+	</body>
 </html>
