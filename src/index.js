@@ -59,6 +59,7 @@ const loginBtn = document.querySelector('.login-btn');
 const registerBtn = document.querySelector('.register-btn');
 const rankListEl = document.querySelector('.rank-list');
 const setUpTextEl = document.querySelector('.set-up-text');
+const viewRankingBtn = document.querySelector('.view-ranking');
 let scorePoints = 0;
 let timeOut;
 let timer;
@@ -254,6 +255,10 @@ lightmodeEl.addEventListener('mousedown', setLightMode);
 
 setColorMode();
 
+viewRankingBtn.addEventListener('click', () => {
+  rankListEl.style.display = 'flex';
+  rankListEl.style.backgroundColor = 'grey';
+});
 // // // // // // // // // // // // // //
 
 // // // // // // // // // // // // // //

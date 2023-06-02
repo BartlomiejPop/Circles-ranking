@@ -245,12 +245,23 @@ audio {
 }
 
 .view-ranking {
+  display: none;
   width: 50px;
   height: 50px;
   border-radius: 100%;
   border: 2px solid rgb(169, 169, 169);
+  background-color: #ffd700;
+  color: rgb(108, 106, 106);
+  font-size: large;
+  font-weight: bold;
   overflow: hidden;
   cursor: pointer;
+}
+
+@media (max-width: 1440px) {
+  .view-ranking {
+    display: block;
+  }
 }
 
 .email-input,
