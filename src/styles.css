@@ -245,7 +245,8 @@ audio {
 }
 
 .email-input,
-.password-input {
+.password-input,
+.name-input {
   margin: 15px;
   padding: 10px;
   border: none;
@@ -272,6 +273,16 @@ audio {
   color: rgb(154, 154, 154);
   font-size: 20px;
   font-weight: 400;
+}
+
+.rank-list {
+  position: absolute;
+  list-style: none;
+  left: 500px;
+}
+
+.rank-list-record {
+  color: rgb(154, 154, 154);
 }
 
 @keyframes puff-in-center {

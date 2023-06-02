@@ -54,6 +54,7 @@ const lightmodeEl = document.querySelector('.lightmode');
 const darkmodeEl = document.querySelector('.darkmode');
 const loginInputEl = document.querySelector('.email-input');
 const registerInputEl = document.querySelector('.password-input');
+const NameInputEl = document.querySelector('.name-input');
 const loginBtn = document.querySelector('.login-btn');
 const registerBtn = document.querySelector('.register-btn');
 const rankListEl = document.querySelector('.rank-list');
@@ -338,8 +339,9 @@ function getRankingScore() {
           el =>
             (rankListEl.innerHTML += `<li class='rank-list-record'>${
               Object.keys(el)[0]
-            } : ${el.record}</li>`)
+            } : ${el.record} points</li>`)
         );
+        // const rankListRecordEl = document.querySelectorAll('.rank-list-record');
       }
     })
     .catch(error => {
