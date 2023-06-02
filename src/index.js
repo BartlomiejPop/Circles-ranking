@@ -64,6 +64,7 @@ let timeOut;
 let timer;
 let bonusTime = 0;
 let bgInterval;
+let name;
 clickSound.volume = 0.1;
 bonusSound.volume = 0.2;
 
@@ -103,7 +104,7 @@ const gameOver = record => {
   }
   if (localStorage.getItem('NewRecord') < record) {
     localStorage.setItem('NewRecord', record);
-    setRankingScore(record, NameInputEl.value);
+    setRankingScore(record, name);
   }
   recordEl.textContent = ` record: ${localStorage.getItem('NewRecord')}`;
 };
@@ -278,7 +279,8 @@ document.getElementById('log-btn').addEventListener('click', function () {
   signInWithEmailAndPassword(auth, loginEmail, loginPassword)
     .then(userCredential => {
       user = userCredential.user;
-      setUpTextEl.textContent = `Logged as ${NameInputEl.value}`;
+      name = NameInputEl.value;
+      setUpTextEl.textContent = `Logged as ${name}`;
       emailInputEl.style.display = 'none';
       passwordInputEl.style.display = 'none';
       NameInputEl.style.display = 'none';
@@ -322,11 +324,12 @@ function setRankingScore(record, name) {
       if (snapshot.exists()) {
         const updates = {};
         updates['records/' + user.uid] = {
-          name: record,
+          record: record,
+          name: name,
         };
         update(ref(db), updates);
       } else {
-        set(ref(db, 'records/' + user.uid), { name: record });
+        set(ref(db, 'records/' + user.uid), { record: record, name: name });
       }
     })
     .catch(error => {
@@ -346,9 +349,7 @@ function getRankingScore() {
         rankingObject.forEach(el => console.log(Object.keys(el)[0], el.record));
         rankingObject.forEach(
           el =>
-            (rankListEl.innerHTML += `<li class='rank-list-record'>${
-              Object.keys(el)[0]
-            } : ${el.record} points</li>`)
+            (rankListEl.innerHTML += `<li class='rank-list-record'>${el.name} : ${el.record} points</li>`)
         );
         // const rankListRecordEl = document.querySelectorAll('.rank-list-record');
       }
