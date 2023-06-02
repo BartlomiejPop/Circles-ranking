@@ -85,17 +85,17 @@ document.getElementById('register-btn').addEventListener('click', function () {
     });
 });
 
-export function setRankingScore() {
+export function setRankingScore(record) {
   get(child(dbRef, user.id))
     .then(snapshot => {
       if (snapshot.exists()) {
         const updates = {};
-        updates[userId] = {
-          scorePoints,
+        updates[user.id] = {
+          record,
         };
         update(ref(db), updates);
       } else {
-        set(ref(db, user.id), { scorePoints });
+        set(ref(db, user.id), { record });
       }
     })
     .catch(error => {

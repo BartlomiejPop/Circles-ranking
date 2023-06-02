@@ -63,7 +63,7 @@ const gameOver = record => {
   }
   if (localStorage.getItem('NewRecord') < record) {
     localStorage.setItem('NewRecord', record);
-    setRankingScore();
+    setRankingScore(record);
   }
   recordEl.textContent = ` record: ${localStorage.getItem('NewRecord')}`;
 };
