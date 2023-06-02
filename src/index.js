@@ -56,6 +56,7 @@ const loginInputEl = document.querySelector('.email-input');
 const registerInputEl = document.querySelector('.password-input');
 const loginBtn = document.querySelector('.login-btn');
 const registerBtn = document.querySelector('.register-btn');
+const rankListEl = document.querySelector('.rank-list');
 let scorePoints = 0;
 let timeOut;
 let timer;
@@ -273,7 +274,7 @@ document.getElementById('log-btn').addEventListener('click', function () {
   signInWithEmailAndPassword(auth, loginEmail, loginPassword)
     .then(userCredential => {
       user = userCredential.user;
-      Notify.success(`Succesfully logged in as ${user}`, {
+      Notify.success(`Succesfully logged in`, {
         timeout: 1000,
       });
     })
@@ -306,23 +307,46 @@ document.getElementById('register-btn').addEventListener('click', function () {
 });
 
 function setRankingScore(record) {
-  console.log(record);
-  // get(child(dbRef, user.id + '/' + 'record'))
-  //   .then(snapshot => {
-  //     if (snapshot.exists()) {
-  //       const updates = {};
-  //       updates[user.id + '/' + 'record'] = {
-  //         record: record,
-  //       };
-  //       update(ref(db), updates);
-  //     } else {
-  //       set(ref(db, user.id + '/' + 'record'), { record: record });
-  //     }
-  //   })
-  //   .catch(error => {
-  //     const errorMessage = error.message;
-  //     Notify.failure(`${errorMessage}`, {
-  //       timeout: 1000,
-  //     });
-  //   });
+  get(child(dbRef, 'records/' + user.uid))
+    .then(snapshot => {
+      if (snapshot.exists()) {
+        const updates = {};
+        updates['records/' + user.uid] = {
+          record: record,
+        };
+        update(ref(db), updates);
+      } else {
+        set(ref(db, 'records/' + user.uid), { record: record });
+      }
+    })
+    .catch(error => {
+      const errorMessage = error.message;
+      Notify.failure(`${errorMessage}`, {
+        timeout: 1000,
+      });
+    });
 }
+
+function getRankingScore() {
+  get(child(dbRef, 'records'))
+    .then(snapshot => {
+      if (snapshot.exists()) {
+        const rankingObject = Object.values(snapshot.val());
+        console.log(rankListEl);
+        rankingObject.forEach(el => console.log(Object.keys(el)[0], el.record));
+        rankingObject.forEach(
+          el =>
+            (rankListEl.innerHTML += `<li class='rank-list-record'>${
+              Object.keys(el)[0]
+            } : ${el.record}</li>`)
+        );
+      }
+    })
+    .catch(error => {
+      const errorMessage = error.message;
+      Notify.failure(`${errorMessage}`, {
+        timeout: 1000,
+      });
+    });
+}
+getRankingScore();
