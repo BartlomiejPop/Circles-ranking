@@ -38,7 +38,7 @@
         <input class="volume" type="range" min="0" max="100" />
       </div>
       <span class="set-up-text">Log In to climb in ranking!</span>
-      <div class="login__form" id="register-div">
+      <form class="login__form" id="register-div">
         <input
           class="email-input"
           type="email"
@@ -57,17 +57,19 @@
           autocomplete="off"
           required
         />
+
+        <div class="log-panel">
+          <button class="login-btn" id="log-btn">log in</button>
+          <button class="register-btn" id="register-btn">register</button>
+        </div>
+      </form>
+      <div class="color-mode">
+        <button class="lightmode"></button>
+        <button class="darkmode"></button>
       </div>
+      <ul class="rank-list"></ul>
     </div>
-    <div class="log-panel">
-      <button class="login-btn" id="log-btn">log in</button>
-      <button class="register-btn" id="register-btn">register</button>
-    </div>
-    <div class="color-mode">
-      <button class="lightmode"></button>
-      <button class="darkmode"></button>
-    </div>
-    <ul class="rank-list"></ul>
+
     <audio
       id="audio"
       src="audio/lost_my_name.mp3"
