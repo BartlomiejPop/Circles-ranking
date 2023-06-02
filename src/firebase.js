@@ -8,6 +8,7 @@ import {
 } from 'firebase/auth';
 import { getDatabase, ref, set, child, get, update } from 'firebase/database';
 import { getAnalytics } from 'firebase/analytics';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyApgtQH9TpXuGobxQfeZcPYiF2US1oLQrA',
@@ -33,7 +34,7 @@ let user;
 let id;
 let loginEmail;
 let loginPassword;
-console.log('firebaseeeeeeeeeee');
+console.log('firebaseeee');
 
 onAuthStateChanged(auth, currentUser => {
   if (currentUser) {
@@ -50,16 +51,16 @@ document.getElementById('log-btn').addEventListener('click', function () {
 
   signInWithEmailAndPassword(auth, loginEmail, loginPassword)
     .then(userCredential => {
-      // Notify.success(`Succesfully logged in`, {
-      //   timeout: 1000,
-      // });
+      Notify.success(`Succesfully logged in`, {
+        timeout: 1000,
+      });
       user = userCredential.user;
     })
     .catch(error => {
       const errorMessage = error.message;
-      // Notify.failure(`${errorMessage}`, {
-      //   timeout: 1000,
-      // });
+      Notify.failure(`${errorMessage}`, {
+        timeout: 1000,
+      });
     });
 });
 
@@ -70,14 +71,15 @@ document.getElementById('register-btn').addEventListener('click', function () {
   createUserWithEmailAndPassword(auth, loginEmail, loginPassword)
     .then(userCredential => {
       user = userCredential.user;
-      // Notify.success(`Succesfully registered! Now log in`, {
-      //   timeout: 1000,
+      Notify.success(`Succesfully registered! Now log in`, {
+        timeout: 1000,
+      });
       console.log('registered');
     })
     .catch(error => {
       const errorMessage = error.message;
-      // Notify.failure(`${errorMessage}`, {
-      //   timeout: 1000,
-      // });
+      Notify.failure(`${errorMessage}`, {
+        timeout: 1000,
+      });
     });
 });
