@@ -244,6 +244,15 @@ audio {
   cursor: pointer;
 }
 
+.view-ranking {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border: 2px solid rgb(169, 169, 169);
+  overflow: hidden;
+  cursor: pointer;
+}
+
 .email-input,
 .password-input,
 .name-input {
@@ -276,14 +285,31 @@ audio {
 }
 
 .rank-list {
+  padding: 20px;
   position: absolute;
   list-style: none;
   right: 50px;
+  border-bottom: 2px solid rgb(154, 154, 154);
+  border-top: 2px solid rgb(154, 154, 154);
+}
+
+@media (max-width: 1440px) {
+  .rank-list {
+    display: none;
+  }
 }
 
 .rank-list-record {
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
   margin: 10px;
   color: rgb(154, 154, 154);
+}
+
+.rank-number {
+  font-weight: bold;
+  font-size: large;
 }
 
 @keyframes puff-in-center {

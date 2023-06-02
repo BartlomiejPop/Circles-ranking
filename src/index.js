@@ -99,6 +99,7 @@ const gameOver = record => {
   scoreEl.innerText = scorePoints;
   timerBgEl.style.display = 'none';
   clearInterval(bgInterval);
+  getRankingScore();
   if (localStorage.getItem('NewRecord') == 0) {
     localStorage.setItem('NewRecord', record);
   }
@@ -173,6 +174,8 @@ const setDarkMode = () => {
   loginBtn.style.backgroundColor = 'rgb(255, 255, 255, 0.2)';
   registerBtn.style.color = 'rgb(255, 255, 255, 0.5)';
   registerBtn.style.backgroundColor = 'rgb(255, 255, 255, 0.2)';
+  NameInputEl.style.color = 'rgb(255, 255, 255, 0.5)';
+  NameInputEl.style.backgroundColor = 'rgb(255, 255, 255, 0.2)';
 };
 
 const setLightMode = () => {
@@ -195,6 +198,8 @@ const setLightMode = () => {
   loginBtn.style.backgroundColor = 'rgba(66, 68, 90, 0.1)';
   registerBtn.style.color = 'rgb(119, 119, 119)';
   registerBtn.style.backgroundColor = 'rgba(66, 68, 90, 0.1)';
+  NameInputEl.style.color = 'rgb(119, 119, 119)';
+  NameInputEl.style.backgroundColor = 'rgba(66, 68, 90, 0.1)';
 };
 
 const setColorMode = () => {
@@ -344,14 +349,24 @@ function getRankingScore() {
   get(child(dbRef, 'records'))
     .then(snapshot => {
       if (snapshot.exists()) {
-        const rankingObject = Object.values(snapshot.val());
-        console.log(rankListEl);
-        rankingObject.forEach(el => console.log(Object.keys(el)[0], el.record));
-        rankingObject.forEach(
-          el =>
-            (rankListEl.innerHTML += `<li class='rank-list-record'>${el.name} : ${el.record} points</li>`)
-        );
-        // const rankListRecordEl = document.querySelectorAll('.rank-list-record');
+        let rankingObject = Object.values(snapshot.val());
+        rankingObject = rankingObject.sort((a, b) => {
+          if (a.record > b.record) {
+            return -1;
+          } else if (a.record < b.record) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        rankListEl.innerHTML = '';
+        for (let i = 0; i < 10 && i < rankingObject.length; i++) {
+          rankListEl.innerHTML += `<li class='rank-list-record'><span class="rank-number">${
+            i + 1
+          }.</span> ${rankingObject[i].name} : ${
+            rankingObject[i].record
+          } points</li>`;
+        }
       }
     })
     .catch(error => {
@@ -361,4 +376,5 @@ function getRankingScore() {
       });
     });
 }
+
 getRankingScore();
