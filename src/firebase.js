@@ -34,6 +34,7 @@ let user;
 let id;
 let loginEmail;
 let loginPassword;
+let scorePoints;
 console.log('firebaseeee');
 
 onAuthStateChanged(auth, currentUser => {
@@ -41,7 +42,7 @@ onAuthStateChanged(auth, currentUser => {
     user = currentUser;
     logged(currentUser.email);
   } else {
-    loggedOut();
+    // loggedOut();
   }
 });
 
@@ -83,3 +84,24 @@ document.getElementById('register-btn').addEventListener('click', function () {
       });
     });
 });
+
+export function setRankingScore() {
+  get(child(dbRef, user.id))
+    .then(snapshot => {
+      if (snapshot.exists()) {
+        const updates = {};
+        updates[userId] = {
+          scorePoints,
+        };
+        update(ref(db), updates);
+      } else {
+        set(ref(db, user.id), { scorePoints });
+      }
+    })
+    .catch(error => {
+      const errorMessage = error.message;
+      Notify.failure(`${errorMessage}`, {
+        timeout: 1000,
+      });
+    });
+}

@@ -1,5 +1,7 @@
 console.log('circles');
 
+import { setRankingScore } from './firebase.js';
+
 const containerEl = document.querySelector('.container');
 const circleEl = document.querySelector('.circle');
 const scoreEl = document.querySelector('.score');
@@ -61,6 +63,7 @@ const gameOver = record => {
   }
   if (localStorage.getItem('NewRecord') < record) {
     localStorage.setItem('NewRecord', record);
+    setRankingScore();
   }
   recordEl.textContent = ` record: ${localStorage.getItem('NewRecord')}`;
 };
