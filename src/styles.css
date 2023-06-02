@@ -278,10 +278,11 @@ audio {
 .rank-list {
   position: absolute;
   list-style: none;
-  left: 500px;
+  right: 50px;
 }
 
 .rank-list-record {
+  margin: 10px;
   color: rgb(154, 154, 154);
 }
 

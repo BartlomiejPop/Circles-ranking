@@ -58,6 +58,7 @@ const NameInputEl = document.querySelector('.name-input');
 const loginBtn = document.querySelector('.login-btn');
 const registerBtn = document.querySelector('.register-btn');
 const rankListEl = document.querySelector('.rank-list');
+const setUpTextEl = document.querySelector('.set-up-text');
 let scorePoints = 0;
 let timeOut;
 let timer;
@@ -89,6 +90,7 @@ const generateCircle = timer => {
 };
 
 const gameOver = record => {
+  rankListEl.style.display = `inline`;
   circleEl.style.display = 'none';
   gameOverEl.style.display = 'flex';
   finalScoreEl.textContent = `Time's up! Your score is: ${scorePoints}`;
@@ -101,7 +103,7 @@ const gameOver = record => {
   }
   if (localStorage.getItem('NewRecord') < record) {
     localStorage.setItem('NewRecord', record);
-    setRankingScore(record);
+    setRankingScore(record, NameInputEl.value);
   }
   recordEl.textContent = ` record: ${localStorage.getItem('NewRecord')}`;
 };
@@ -218,6 +220,7 @@ playAgainBtn.addEventListener('click', () => {
   timerBgEl.textContent = timer + 'ms';
   timerBgEl.style.display = 'block';
   gameOverEl.style.display = 'none';
+  rankListEl.style.display = `none`;
   setTimeout(() => {
     generateCircle(timer);
   }, 500);
@@ -275,6 +278,12 @@ document.getElementById('log-btn').addEventListener('click', function () {
   signInWithEmailAndPassword(auth, loginEmail, loginPassword)
     .then(userCredential => {
       user = userCredential.user;
+      setUpTextEl.textContent = `Logged as ${NameInputEl.value}`;
+      emailInputEl.style.display = 'none';
+      passwordInputEl.style.display = 'none';
+      NameInputEl.style.display = 'none';
+      logInBtn.style.display = 'none';
+      registerBtn.style.display = 'none';
       Notify.success(`Succesfully logged in`, {
         timeout: 1000,
       });
@@ -307,17 +316,17 @@ document.getElementById('register-btn').addEventListener('click', function () {
     });
 });
 
-function setRankingScore(record) {
+function setRankingScore(record, name) {
   get(child(dbRef, 'records/' + user.uid))
     .then(snapshot => {
       if (snapshot.exists()) {
         const updates = {};
         updates['records/' + user.uid] = {
-          record: record,
+          name: record,
         };
         update(ref(db), updates);
       } else {
-        set(ref(db, 'records/' + user.uid), { record: record });
+        set(ref(db, 'records/' + user.uid), { name: record });
       }
     })
     .catch(error => {
