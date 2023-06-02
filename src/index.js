@@ -15,8 +15,8 @@ const bonusSound = document.getElementById('bonus');
 const recordEl = document.querySelector('.record');
 const lightmodeEl = document.querySelector('.lightmode');
 const darkmodeEl = document.querySelector('.darkmode');
-const loginInputEl = document.querySelector('.login-input');
-const registerInputEl = document.querySelector('.register-input');
+const loginInputEl = document.querySelector('.email-input');
+const registerInputEl = document.querySelector('.password-input');
 const loginBtn = document.querySelector('.login-btn');
 const registerBtn = document.querySelector('.register-btn');
 let scorePoints = 0;
@@ -50,7 +50,6 @@ const generateCircle = timer => {
 };
 
 const gameOver = record => {
-  timerBgEl.style.display = 'none';
   circleEl.style.display = 'none';
   gameOverEl.style.display = 'flex';
   finalScoreEl.textContent = `Time's up! Your score is: ${scorePoints}`;
@@ -205,6 +204,16 @@ lightmodeEl.addEventListener('mousedown', setLightMode);
 
 setColorMode();
 
-// window.addEventListener("mousedown", (e) => {
-// 	console.log(e);
-// });
+// // // // // // // // // // // // // //
+
+// // // // // // // // // // // // // //
+
+// // // // // // // // // // // // // //
+
+//FIREBASE
+
+// // // // // // // // // // // // // //
+
+// // // // // // // // // // // // // //
+
+// // // // // // // // // // // // // //
