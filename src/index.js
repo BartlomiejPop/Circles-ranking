@@ -100,15 +100,26 @@ const gameOver = record => {
   scoreEl.innerText = scorePoints;
   timerBgEl.style.display = 'none';
   clearInterval(bgInterval);
-  getRankingScore();
+
   if (localStorage.getItem('NewRecord') == 0) {
     localStorage.setItem('NewRecord', record);
   }
   if (localStorage.getItem('NewRecord') < record) {
     localStorage.setItem('NewRecord', record);
-    setRankingScore(record, name);
   }
   recordEl.textContent = ` record: ${localStorage.getItem('NewRecord')}`;
+  get(child(dbRef, 'records/' + user.uid)).then(snapshot => {
+    if (snapshot.val() !== null) {
+      if (snapshot.val().record < record) {
+        setRankingScore(record, name);
+      }
+    } else {
+      setRankingScore(record, name);
+    }
+  });
+  setTimeout(() => {
+    getRankingScore();
+  }, 500);
 };
 
 const handleCircleClick = () => {
@@ -159,9 +170,9 @@ const setDarkMode = () => {
   playAgainBtn.style.color = ' rgb(255, 255, 255, 0.5)';
   document.querySelector('body').style.backgroundImage =
     'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WPYoOL4wCrFoXXSCxZNLhZ4y1b8XrY26l2y3js1dDOD3Ffc1eWfT26yySZIzieWOpQE&usqp=CAU)';
-  document.querySelector('body').style.backgroundSize = '37px';
+  document.querySelector('body').style.backgroundSize = '60px';
   document.querySelector('body').style.animation =
-    'bg-scrolling-dark 1.44s infinite linear';
+    'bg-scrolling-dark 0.38s infinite linear';
   timerBgEl.style.color = 'rgb(150, 150, 150,0.35)';
   playMusicBtn.style.backgroundColor = 'rgb(255, 255, 255, 0.2)';
   playMusicBtn.style.color = ' rgb(255, 255, 255, 0.5)';
@@ -256,7 +267,6 @@ lightmodeEl.addEventListener('mousedown', setLightMode);
 setColorMode();
 
 viewRankingBtn.addEventListener('click', () => {
-  console.log(rankListEl.classList);
   rankListEl.classList.toggle('is-hidden');
 });
 // // // // // // // // // // // // // //
@@ -273,14 +283,15 @@ viewRankingBtn.addEventListener('click', () => {
 
 // // // // // // // // // // // // // //
 
-onAuthStateChanged(auth, currentUser => {
-  if (currentUser) {
-    user = currentUser;
-    // logged(currentUser.email);
-  } else {
-    // loggedOut();
-  }
-});
+// onAuthStateChanged(auth, currentUser => {
+//   if (currentUser) {
+//     user = currentUser;
+//     console.log(user.uid);
+//     // logged(currentUser.email);
+//   } else {
+//     // loggedOut();
+//   }
+// });
 
 document.getElementById('log-btn').addEventListener('click', function () {
   loginEmail = document.getElementById('login-email').value;
@@ -364,7 +375,8 @@ function getRankingScore() {
             return 0;
           }
         });
-        rankListEl.innerHTML = '';
+        rankListEl.textContent = '';
+
         for (let i = 0; i < 10 && i < rankingObject.length; i++) {
           rankListEl.innerHTML += `<li class='rank-list-record'><span class="rank-number">${
             i + 1
