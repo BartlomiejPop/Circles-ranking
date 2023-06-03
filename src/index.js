@@ -92,7 +92,9 @@ const generateCircle = timer => {
 };
 
 const gameOver = record => {
-  rankListEl.style.display = `inline`;
+  if (window.innerWidth > 1440) {
+    rankListEl.classList.remove('is-hidden');
+  }
   circleEl.style.display = 'none';
   gameOverEl.style.display = 'flex';
   finalScoreEl.textContent = `Time's up! Your score is: ${scorePoints}`;
@@ -238,7 +240,7 @@ playAgainBtn.addEventListener('click', () => {
   timerBgEl.textContent = timer + 'ms';
   timerBgEl.style.display = 'block';
   gameOverEl.style.display = 'none';
-  rankListEl.style.display = `none`;
+  rankListEl.classList.add('is-hidden');
   setTimeout(() => {
     generateCircle(timer);
   }, 500);
@@ -397,6 +399,5 @@ function getRankingScore() {
 getRankingScore();
 
 if (window.innerWidth < 1440) {
-  console.log('test');
   rankListEl.classList.add('is-hidden');
 }
