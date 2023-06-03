@@ -306,9 +306,10 @@ audio {
 
 @media (max-width: 1440px) {
   .rank-list {
-    background-color: #f9f9f9;
+    background-color: rgb(119, 119, 119, 0.8);
     border-radius: 5px;
     color: black;
+    z-index: 100;
   }
 }
 
@@ -318,6 +319,12 @@ audio {
   justify-content: space-between;
   margin: 10px;
   color: rgb(154, 154, 154);
+}
+
+@media (max-width: 1440px) {
+  .rank-list-record {
+    color: white;
+  }
 }
 
 .rank-number {
