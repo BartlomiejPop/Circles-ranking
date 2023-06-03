@@ -395,3 +395,8 @@ function getRankingScore() {
 }
 
 getRankingScore();
+
+if (window.innerWidth < 1440) {
+  console.log('test');
+  rankListEl.classList.add('is-hidden');
+}
