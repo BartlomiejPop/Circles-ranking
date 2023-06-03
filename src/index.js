@@ -256,7 +256,7 @@ lightmodeEl.addEventListener('mousedown', setLightMode);
 setColorMode();
 
 viewRankingBtn.addEventListener('click', () => {
-  rankListEl.classList.toggle = 'is-hidden';
+  rankListEl.classList.toggle('is-hidden');
 });
 // // // // // // // // // // // // // //
 
