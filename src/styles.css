@@ -306,7 +306,6 @@ audio {
 
 @media (max-width: 1440px) {
   .rank-list {
-    display: none;
     background-color: #f9f9f9;
     border-radius: 5px;
     color: black;
