@@ -30,7 +30,6 @@ const logInBtn = document.querySelector('.login-btn');
 let user;
 let loginEmail;
 let loginPassword;
-console.log('firebase');
 
 const containerEl = document.querySelector('.container');
 const circleEl = document.querySelector('.circle');
@@ -244,7 +243,6 @@ playAgainBtn.addEventListener('click', () => {
 });
 
 playMusicBtn.addEventListener('mousedown', () => {
-  console.log(playMusicBtn.innerHTML);
   if (
     playMusicBtn.innerHTML ===
     `<i class="fa-solid fa-play" aria-hidden="true"></i>`
@@ -309,7 +307,6 @@ document.getElementById('register-btn').addEventListener('click', function () {
       Notify.success(`Succesfully registered! Now log in`, {
         timeout: 1000,
       });
-      console.log('registered');
     })
     .catch(error => {
       const errorMessage = error.message;
