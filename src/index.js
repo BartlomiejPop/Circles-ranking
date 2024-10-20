@@ -1,12 +1,8 @@
-console.log('circles');
-
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
 } from 'firebase/auth';
 import { getDatabase, ref, set, child, get, update } from 'firebase/database';
 import { getAnalytics } from 'firebase/analytics';
@@ -32,7 +28,6 @@ const emailInputEl = document.querySelector('.email-input');
 const passwordInputEl = document.querySelector('.password-input');
 const logInBtn = document.querySelector('.login-btn');
 let user;
-let id;
 let loginEmail;
 let loginPassword;
 console.log('firebase');
@@ -249,7 +244,11 @@ playAgainBtn.addEventListener('click', () => {
 });
 
 playMusicBtn.addEventListener('mousedown', () => {
-  if (playMusicBtn.innerHTML == `<i class="fa-solid fa-play"></i>`) {
+  console.log(playMusicBtn.innerHTML);
+  if (
+    playMusicBtn.innerHTML ===
+    `<i class="fa-solid fa-play" aria-hidden="true"></i>`
+  ) {
     musicEl.play();
     musicEl.volume = musicVolume.value / 100;
     playMusicBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
@@ -271,29 +270,8 @@ setColorMode();
 viewRankingBtn.addEventListener('click', () => {
   rankListEl.classList.toggle('is-hidden');
 });
-// // // // // // // // // // // // // //
-
-// // // // // // // // // // // // // //
-
-// // // // // // // // // // // // // //
 
 //FIREBASE
-
-// // // // // // // // // // // // // //
-
-// // // // // // // // // // // // // //
-
-// // // // // // // // // // // // // //
-
-// onAuthStateChanged(auth, currentUser => {
-//   if (currentUser) {
-//     user = currentUser;
-//     console.log(user.uid);
-//     // logged(currentUser.email);
-//   } else {
-//     // loggedOut();
-//   }
-// });
 
 document.getElementById('log-btn').addEventListener('click', function () {
   loginEmail = document.getElementById('login-email').value;
